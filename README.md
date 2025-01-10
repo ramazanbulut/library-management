@@ -31,6 +31,9 @@ npm install
 
 Start the application in development mode using `nodemon`:
 
+The application will start on port 3000 by default or use the value specified in the .env file 
+under the PORT variable. You can access the API at:
+
 ```bash
 npm run dev
 ```
