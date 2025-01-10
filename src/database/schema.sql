@@ -1,0 +1,41 @@
+PRAGMA foreign_keys = ON;
+
+BEGIN TRANSACTION;
+
+DROP TABLE IF EXISTS borrows;
+DROP TABLE IF EXISTS books;
+DROP TABLE IF EXISTS users;
+
+CREATE TABLE users (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    name VARCHAR(255) NOT NULL,
+    createdAt DATETIME NOT NULL,
+    updatedAt DATETIME NOT NULL
+);
+
+CREATE TABLE books (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    name VARCHAR(255) NOT NULL,
+    score FLOAT DEFAULT '-1',
+    totalReviews INTEGER DEFAULT 0,
+    createdAt DATETIME NOT NULL,
+    updatedAt DATETIME NOT NULL
+);
+
+CREATE TABLE borrows (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    userId INTEGER NOT NULL,
+    bookId INTEGER NOT NULL,
+    borrowDate DATETIME NOT NULL,
+    returnDate DATETIME,
+    userScore INTEGER,
+    createdAt DATETIME NOT NULL,
+    updatedAt DATETIME NOT NULL,
+    FOREIGN KEY (userId) REFERENCES users(id) ON DELETE CASCADE ON UPDATE CASCADE,
+    FOREIGN KEY (bookId) REFERENCES books(id) ON DELETE CASCADE ON UPDATE CASCADE
+);
+
+CREATE INDEX idx_borrows_user ON borrows(userId);
+CREATE INDEX idx_borrows_book ON borrows(bookId);
+
+COMMIT;

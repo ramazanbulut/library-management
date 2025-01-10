@@ -1,21 +1,23 @@
-# Library Management API
+# 📚 Library Management API
 
-This is a RESTful API for managing a library system. It allows users to manage books and borrow/return functionality with user ratings.
+A RESTful API for managing a library system. This application allows users to manage books, handle borrowing/returning functionality, and rate books.
 
 ---
 
-## Installation
+## 🚀 Getting Started
 
 ### Prerequisites
 
+Before you begin, ensure you have the following installed:
+
 - **Node.js** (v14 or higher)
-- **npm** (comes with Node.js)
+- **npm** (bundled with Node.js)
 
 ---
 
-### Install Dependencies
+### Installation
 
-Run the following command in the project directory:
+To install dependencies, run the following command in the project directory:
 
 ```bash
 npm install
@@ -23,11 +25,11 @@ npm install
 
 ---
 
-## Running the Project
+## 🛠 Running the Application
 
-### Development Mode
+### Development Mode (Hot-Reloading)
 
-To run the application in development mode with hot-reloading (using `nodemon`):
+Start the application in development mode using `nodemon`:
 
 ```bash
 npm run dev
@@ -49,101 +51,76 @@ npm run dev
 
 ---
 
-## API Endpoints
+## 📖 API Endpoints
 
-### User Management
+### 🧑‍🤝‍🧑 User Management
 
-- **List All Users**
-  ```http
-  GET /users
-  ```
-
-- **Get User Details**
-  ```http
-  GET /users/:id
-  ```
-
-- **Create a New User**
-  ```http
-  POST /users
-  Body:
-  {
-    "name": "John Doe"
-  }
-  ```
+- **List All Users:** `GET /users`
+- **Get User Details:** `GET /users/:id`
+- **Create a New User:** `POST /users`
 
 ---
 
-### Book Management
+### 📚 Book Management
 
-- **List All Books**
-  ```http
-  GET /books
-  ```
-
-- **Get Book Details**
-  ```http
-  GET /books/:id
-  ```
-
-- **Create a New Book**
-  ```http
-  POST /books
-  Body:
-  {
-    "name": "1984"
-  }
-  ```
+- **List All Books:** `GET /books`
+- **Get Book Details:** `GET /books/:id`
+- **Create a New Book:** `POST /books`
 
 ---
 
-### Borrow and Return
+### 🔄 Borrow and Return Management
 
-- **Borrow a Book**
-  ```http
-  POST /borrow/:userId/borrow/:bookId
-  ```
-
-- **Return a Book**
-  ```http
-  POST /borrow/:userId/return/:bookId
-  Body:
-  {
-    "score": 8
-  }
-  ```
+- **Borrow a Book:** `POST /borrow/:userId/borrow/:bookId`
+- **Return a Book:** `POST /borrow/:userId/return/:bookId`
 
 ---
 
-## Database
+## 🗂 Database Schema Initialization
 
-This project uses **SQLite** as the database. The database file (`library.db`) is automatically created in the project directory. If you need to reset the database, set the `sequelize.sync()` configuration to `force: true`.
+This project uses **Sequelize ORM** for database management but relies on a pre-defined **DDL script** for precise schema control.
+
+### Key Details
+
+- **Script Location:**  
+  `library-management/src/database/schema.sql`
+  
+- **Initialization Logic:**  
+  Implemented in `initializeDatabase` function inside:  
+  `library-management/src/database/database.ts`
+
+### How It Works
+
+The DDL script is executed line-by-line during the application's startup to ensure the database schema is consistently initialized and easy to update.
 
 ---
 
-## Scripts
+## 📜 Scripts
 
-- **Development Mode:**
+- **Start Development Mode:**  
   ```bash
   npm run dev
   ```
 
-- **Build:**
+- **Build the Project:**  
   ```bash
   npm run build
   ```
 
-- **Production Mode:**
+- **Run in Production Mode:**  
   ```bash
   npm run start
   ```
 
 ---
 
-## Testing
+## 🧪 Testing
 
-To test the API, you can use Postman or `cURL`. A Postman collection file is provided for your convenience.
-
-- **Postman Collection File:** `Library Case API Collection.postman_collection.json`
+To test the API, use **Postman** or `cURL`.  
+A **Postman collection** is provided for quick setup and testing.
 
 ---
+
+### 📬 Feedback
+
+If you have any feedback or suggestions, feel free to reach out or create an issue in the repository.
