@@ -1,15 +1,19 @@
 import { Request, Response } from 'express';
 import User from '../models/User';
 import Book from '../models/Book';
+import Borrow from '../models/Borrow';
 
 export const listUsers = async (_req: Request, res: Response) => {
     const users = await User.findAll();
     res.json(users);
 };
 
-export const getUserDetails = async (req: Request, res: Response) => {
+export const getUserDetails = async (req: Request, res: Response): Promise<void> => {
     const user = await User.findByPk(req.params.id, {
-        include: { model: Book },
+        include: [{
+            model: Borrow,
+            include: [{ model: Book }]
+         }],
     });
     if (!user) {
         res.status(404).json({ message: 'User not found' });

@@ -5,8 +5,13 @@ import sequelize from './database/database';
 import userRoutes from './routes/userRoutes';
 import bookRoutes from './routes/bookRoutes';
 import borrowRoutes from './routes/borrowRoutes';
+import dotenv from 'dotenv';
+
+dotenv.config();
 
 const app = express();
+
+const PORT = process.env.PORT || 3000;
 
 app.use(bodyParser.json());
 app.use(cors());
@@ -17,7 +22,7 @@ app.use('/users', borrowRoutes);
 
 sequelize.sync({ force: true }).then(() => {
     console.log('Database synced');
-    app.listen(3000, () => {
-        console.log('Server running on http://localhost:3000');
+    app.listen(PORT, () => {
+        console.log(`Server running on http://localhost:${PORT}`);
     });
 });

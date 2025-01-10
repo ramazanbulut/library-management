@@ -12,17 +12,19 @@ class Borrow extends Model {
  }
 Borrow.init(
     {
-        userId: { type: DataTypes.INTEGER, references: { model: User, key: 'id' } },
-        bookId: { type: DataTypes.INTEGER, references: { model: Book, key: 'id' } },
+        id: { type: DataTypes.INTEGER, autoIncrement: true, primaryKey: true },
+        userId: { type: DataTypes.INTEGER, references: { model: User, key: 'id' }, allowNull: false},
+        bookId: { type: DataTypes.INTEGER, references: { model: Book, key: 'id' }, allowNull: false},
         borrowDate: { type: DataTypes.DATE, allowNull: false, defaultValue: DataTypes.NOW },
         userScore: { type: DataTypes.INTEGER, allowNull: true },
         returnDate: { type: DataTypes.DATE, allowNull: true },
-        
     },
-    { sequelize, modelName: 'borrow' }
+    { sequelize, modelName: 'borrow', timestamps: true }
 );
 
-User.belongsToMany(Book, { through: Borrow });
-Book.belongsToMany(User, { through: Borrow });
+Borrow.belongsTo(Book);
+Borrow.belongsTo(User);
+Book.hasMany(Borrow);
+User.hasMany(Borrow);
 
 export default Borrow;

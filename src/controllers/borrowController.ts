@@ -17,20 +17,23 @@ export const borrowBook = async (req: Request, res: Response) => {
     const book = await Book.findByPk(bookId);
     if (!book) {
         res.status(404).json({ message: 'Book not found' });
-        return
+        return;
     }
 
-    // Check if the book is already borrowed
-    const existingBorrow = await Borrow.findOne({ where: { bookId } });
+    // Check if the book is already borrowed and not returned
+    const existingBorrow = await Borrow.findOne({
+        where: { bookId, returnDate: null }, // Only active borrows
+    });
     if (existingBorrow) {
         res.status(400).json({ message: 'Book is already borrowed' });
         return;
     }
 
-    // Create borrow record
+    // Create a new borrow record
     await Borrow.create({ userId, bookId, borrowDate: new Date() });
     res.status(204).send(); // No Content
 };
+
 
 export const returnBook = async (req: Request, res: Response) => {
     const { id: userId, bookId } = req.params;
@@ -56,7 +59,7 @@ export const returnBook = async (req: Request, res: Response) => {
     });
     if (!borrow) {
         res.status(400)
-        .json({ message: 'Book was not borrowed by this user or already returned' });
+            .json({ message: 'Book was not borrowed by this user or already returned' });
         return;
     }
 
