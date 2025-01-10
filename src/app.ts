@@ -6,6 +6,7 @@ import userRoutes from './routes/userRoutes';
 import bookRoutes from './routes/bookRoutes';
 import borrowRoutes from './routes/borrowRoutes';
 import dotenv from 'dotenv';
+import { errorHandler } from './middleware/errorHandler';
 
 dotenv.config();
 
@@ -14,10 +15,13 @@ const PORT = process.env.PORT || 3000;
 
 app.use(bodyParser.json());
 app.use(cors());
+app.use(errorHandler);
+
 
 app.use('/users', userRoutes);
 app.use('/books', bookRoutes);
 app.use('/users', borrowRoutes);
+
 
 
 const startServer = async () => {
