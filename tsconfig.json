@@ -1,0 +1,17 @@
+{
+  "compilerOptions": {
+    "target": "ES6", // Çıktı için hedef JavaScript sürümü
+    "module": "commonjs", // Node.js için modül sistemi
+    "rootDir": "src", // Kaynak dosyalarının bulunduğu dizin
+    "outDir": "dist", // Derlenmiş dosyaların çıkacağı dizin
+    "strict": true, // Sıkı type-checking modları
+    "esModuleInterop": true, // ES modülleri ile uyumluluk
+    "forceConsistentCasingInFileNames": true // Büyük/küçük harf duyarlılığı
+  },
+  "include": [
+    "src"
+  ], // Derlenecek dosyaların dizini
+  "exclude": [
+    "node_modules"
+  ] // Derleme dışı bırakılacak dosyalar
+}
